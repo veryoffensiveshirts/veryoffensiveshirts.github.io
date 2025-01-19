@@ -98,7 +98,7 @@ function displayProducts(humorCategory, subtypeCategory = '') {
         const productDiv = document.createElement('div');
         productDiv.classList.add('product');
         productDiv.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" width=95%>
+            <img src="images/${product.image}" alt="${product.name}" width=95%>
             <p>${product.name}</p>
             <p>$${product.price}</p>
             <select id="size-${product.name}">

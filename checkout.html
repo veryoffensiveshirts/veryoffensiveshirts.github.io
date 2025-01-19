@@ -34,7 +34,6 @@
 
   <script>
     // Fetch cart data from localStorage
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const total = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
     let descr = '';
 

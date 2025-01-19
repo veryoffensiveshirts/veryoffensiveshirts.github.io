@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funderwear - Clothing Store</title>
+    <link rel="icon" type="image/x-icon" href="f.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body onload="updateCartDisplay()">
+    <div class="wrapper">
+        <header>
+            <div class="header-container">
+                <h1>Funderwear</h1>
+                <img src="logo2.png" width="25%">
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+            </ul>
+        </nav>
+
+        <main>
+            <section class="shop-section">
+                <h2>Shop Our Clothing</h2>
+
+                <div class="dropdowns">
+
+                    <div class="dropdown">
+                        <label for="humor-dropdown">Select Humor:</label>
+                        <select id="humor-dropdown">
+                            <option value="">-- Choose Humor Type --</option>
+                        </select>
+                    </div>
+
+                    <div class="dropdown" id="political-type">
+                        <label for="subtype-dropdown" id="subtype-label" style="display: none;">Select Political Type:</label>
+                        <select id="subtype-dropdown" style="display: none;">
+                            <option value="">-- Choose Type --</option>
+                            <option value="woke">Woke</option>
+                            <option value="antiWoke">Anti-Woke</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="products-grid" class="product-grid">
+                    <!-- Products will be displayed dynamically -->
+                </div>
+            </section>
+
+            <div id="cart-dropdown" class="cart-dropdown">
+                <button id="cart-button">Cart (0)</button>
+                <div id="cart-content" class="cart-content">
+                    <ul id="cart-items-list"></ul>
+                    <button id="clear-cart">Clear Cart</button><br>
+                    <button class="checkout-btn" onclick=redirectToCheckout()>Checkout</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Email: <a href="mailto:ejh4527@gmail.com">ejh4527@gmail.com</a></p>
+            <p>&copy; 2025 Funderwear. All rights reserved.</p>
+        </footer>
+    </div>
+    
+</body>
+</html>

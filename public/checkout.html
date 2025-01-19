@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Page</title>
+  <script src="script.js" defer></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=ATnrDQLW6xabIOUPIGdk9Z1iTVlVxTYt1RCnvPJxrH0Mf_i0qKXW9wAXAprkMHluyRYGt-Kb7-hml61H&currency=CAD"></script>
+</head>
+<body>
+  <header>
+    <h1>Checkout Page</h1>
+  </header>
+
+  <main>
+    <div id="checkout">
+      <h2>Order Summary</h2>
+      <ul id="cart-summary"></ul>
+      <p><strong>Total: $<span id="total-price"></span></strong></p>
+
+      <form id="checkout-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required><br><br>
+      </form>
+
+      <div id="paypal-button-container"></div>
+
+      <button class="back-btn" onclick=redirectToHome()>Back</button>
+    </div>
+  </main>
+
+  <script>
+    // Fetch cart data from localStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const total = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+    let descr = '';
+
+    // Display cart items
+    const cartSummary = document.getElementById('cart-summary');
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.name} (${item.size}) - $${item.price}`;
+      cartSummary.appendChild(li);
+      descr += `${item.name} (${item.size})`
+    });
+
+    // Display total price
+    document.getElementById('total-price').textContent = total;
+
+    // Render PayPal button
+    paypal.Buttons({
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              currency_code: "CAD",
+              value: total
+            },
+            description: descr
+          }]
+        });
+      },
+      onApprove: (data, actions) => {
+        return actions.order.capture().then(details => {
+          alert(`Transaction completed by ${details.payer.name.given_name}!`);
+          localStorage.removeItem('cart'); // Clear cart on successful payment
+          sendOrderEmail(details); // Send email notification
+        });
+      },
+      onError: (err) => {
+        console.error("PayPal Error:", err);
+      }
+    }).render('#paypal-button-container');
+
+    function redirectToHome() {
+      window.location.href = "index.html";
+    }
+
+    function sendOrderEmail(details) {
+      // Prepare the order details to send via POST
+      const orderData = {
+        name: document.getElementById('name').value,
+        address: document.getElementById('address').value,
+        cart: cart,
+        total: total,
+        payerName: details.payer.name.given_name
+      };
+
+      // Send order details to the backend using POST request
+      fetch('/send-order-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          console.log('Email sent successfully!');
+        } else {
+          console.error('Error sending email:', data.error);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -27,22 +27,27 @@ body {
   }
   
   /* Header and main grow naturally */
-  header, main {
-    flex: 1;
+  header{
+    flex: 0.75;
+  }
+
+  main {
+    flex: 3;
   }
 
 /* Header */
 header {
     background: #ff594a;
     color: #fff;
-    padding: 1rem 0;
+    padding: 10px;
     text-align: center;
 }
 
 header h1 {
-    font-size: 5rem;
+    font-size: 8vw;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 10px;
+    margin-top: 1vh;
 }
 
 header a {
@@ -100,7 +105,7 @@ select {
 /* Products Grid */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(0px, 100%));
     gap: 1rem;
     margin: 2rem 0;
 }

@@ -1,5 +1,7 @@
 const price = 20;
 
+const cart_button = document.getElementById("cart-button");
+
 const products = {
     shirts: {
         cute: [
@@ -42,6 +44,10 @@ const products = {
 // Initialize cart as an empty array
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+if (cart.length == 0){
+    cart_button.style.visibility = "hidden";
+}
+
 const humorDropdown = document.getElementById('humor-dropdown');
 const types = ['cute', 'memes', 'political'];
 types.forEach(type => {
@@ -59,17 +65,29 @@ document.getElementById('humor-dropdown').addEventListener('change', function() 
 
     // Reset the products grid
     document.getElementById('products-grid').innerHTML = '';
+    if (cart.length == 0){
+        cart_button.style.visibility = "hidden";
+    }
 
     if (humorCategory === 'political') {
         // Show political subtype options (woke, anti-woke)
         subtypeDropdown.style.display = 'inline-block';
         subtypeLabel.style.display = 'inline-block';
-    } else {
+    } else if ((humorCategory === 'memes') || (humorCategory === 'cute')){
         // Hide political subtype and display products
+        subtypeDropdown.value = '';
         subtypeDropdown.style.display = 'none';
         subtypeLabel.style.display = 'none';
         displayProducts(humorCategory);
+        cart_button.style.visibility = "visible";
+    } else {
+        subtypeDropdown.style.display = 'none';
+        subtypeLabel.style.display = 'none';
+        if (cart.length == 0){
+            cart_button.style.visibility = "hidden";
+        }
     }
+    
 });
 
 // Add event listener to Subtype (Political) dropdown
@@ -79,6 +97,7 @@ document.getElementById('subtype-dropdown').addEventListener('change', function(
 
     if (humorCategory && subtypeCategory) {
         displayProducts(humorCategory, subtypeCategory);
+        cart_button.style.visibility = "visible";
     }
 });
 
@@ -146,6 +165,9 @@ document.getElementById('clear-cart').addEventListener('click', function() {
     cart = [];
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartDisplay();
+    if (document.getElementById('humor-dropdown').value == ''){
+        cart_button.style.visibility = "hidden";
+    }
 });
 
 // Update the cart dropdown and button text
@@ -181,6 +203,9 @@ function removeFromCart(index) {
     cart.splice(index, 1);
     updateCartDisplay();
     localStorage.setItem('cart', JSON.stringify(cart)); // Update localStorage
+    if (cart.length == 0 && document.getElementById('humor-dropdown').value == ''){
+        cart_button.style.visibility = "hidden";
+    }
 }
   
 // Redirect to checkout

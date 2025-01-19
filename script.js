@@ -3,37 +3,37 @@ const price = 20;
 const products = {
     shirts: {
         cute: [
-            { name: 'Bee Beautiful', price: price, image: '12CUTE.png' },
-            { name: 'Boss Babe Energy', price: price, image: '13.png' },
-            { name: 'Absolute Queen', price: price, image: '14.png' },
-            { name: 'Good Morning Sunshine', price: price, image: '15.png' },
-            { name: 'Stay Pawsitive', price: price, image: '16.png' },
+            { name: 'Bee Beautiful', price: price, image: 'images/12CUTE.png' },
+            { name: 'Boss Babe Energy', price: price, image: 'images/13.png' },
+            { name: 'Absolute Queen', price: price, image: 'images/14.png' },
+            { name: 'Good Morning Sunshine', price: price, image: 'images/15.png' },
+            { name: 'Stay Pawsitive', price: price, image: 'images/16.png' },
         ],
         memes: [
-            { name: 'I Love Goth Girls', price: price, image: '1Ilovegothgirls.png' },
-            { name: 'Skib.', price: price, image: '2.png' },
-            { name: 'Don\'t Commit Arson', price: price, image: 'dont.png' },
-            { name: 'Don\'t Break My Edging Streak', price: price, image: '5.png' },
-            { name: 'R U Restarted?', price: price, image: '6.png' },
-            { name: 'I Prefer Men', price: price, image: '7.png' },
-            { name: 'It\'s Not Gay If You Do It For Money', price: price, image: '8.png' },
-            { name: 'Gimme Head', price: price, image: '9.png' },
-            { name: 'Let Me Touch You Bro', price: price, image: '10.png' },
-            { name: 'So No Head?', price: price, image: '11sonohead.png' },
+            { name: 'I Love Goth Girls', price: price, image: 'images/1Ilovegothgirls.png' },
+            { name: 'Skib.', price: price, image: 'images/2.png' },
+            { name: 'Don\'t Commit Arson', price: price, image: 'images/dont.png' },
+            { name: 'Don\'t Break My Edging Streak', price: price, image: 'images/5.png' },
+            { name: 'R U Restarted?', price: price, image: 'images/6.png' },
+            { name: 'I Prefer Men', price: price, image: 'images/7.png' },
+            { name: 'It\'s Not Gay If You Do It For Money', price: price, image: 'images/8.png' },
+            { name: 'Gimme Head', price: price, image: 'images/9.png' },
+            { name: 'Let Me Touch You Bro', price: price, image: 'images/10.png' },
+            { name: 'So No Head?', price: price, image: 'images/11sonohead.png' },
         ],
         political: {
             woke: [
-                { name: 'My Body, My Choice', price: price, image: '22.png' },
-                { name: 'Make Love, Not War', price: price, image: '23.png' },
-                { name: 'Climate Action. Now.', price: price, image: '24.png' },
-                { name: 'Respect Pronouns', price: price, image: '25.png' },
+                { name: 'My Body, My Choice', price: price, image: 'images/22.png' },
+                { name: 'Make Love, Not War', price: price, image: 'images/23.png' },
+                { name: 'Climate Action. Now.', price: price, image: 'images/24.png' },
+                { name: 'Respect Pronouns', price: price, image: 'images/25.png' },
             ],
             antiWoke: [
-                { name: 'Tax is Theft', price: price, image: '17.png' },
-                { name: 'Small Government, Big Freedom', price: price, image: '18.png' },
-                { name: 'Freedom isn\'t Free', price: price, image: '19.png' },
-                { name: 'MAGA', price: price, image: '20.png' },
-                { name: 'Ban Trudeau', price: price, image: '21.png' },
+                { name: 'Tax is Theft', price: price, image: 'images/17.png' },
+                { name: 'Small Government, Big Freedom', price: price, image: 'images/18.png' },
+                { name: 'Freedom isn\'t Free', price: price, image: 'images/19.png' },
+                { name: 'MAGA', price: price, image: 'images/20.png' },
+                { name: 'Ban Trudeau', price: price, image: 'images/21.png' },
             ],
         },
     },
@@ -98,7 +98,7 @@ function displayProducts(humorCategory, subtypeCategory = '') {
         const productDiv = document.createElement('div');
         productDiv.classList.add('product');
         productDiv.innerHTML = `
-            <img src="images/${product.image}" alt="${product.name}" width=95%>
+            <img src="${product.image}" alt="${product.name}" width=95%>
             <p>${product.name}</p>
             <p>$${product.price}</p>
             <select id="size-${product.name}">

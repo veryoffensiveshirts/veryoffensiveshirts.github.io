@@ -129,12 +129,22 @@ function displayProducts(humorCategory, subtypeCategory = '') {
               <option value="xxl">Extra Extra Large (XXL)</option>
             </select>
             <br><br>
-            <button id="add-to-cart-${product.name}" class="add-to-cart">Add to Cart</button>
+            <button id="add-to-cart-${product.name}" class="add-to-cart" disabled=true>Add to Cart</button>
         `;
         productsGrid.appendChild(productDiv);
 
         // Add event listener to the "Add to Cart" button
         const addButton = document.getElementById('add-to-cart-' + product.name);
+        const sizeSelect = document.getElementById('size-' + product.name);
+
+        sizeSelect.addEventListener('change', function() {
+            if (sizeSelect.value != '-') {
+                addButton.disabled = false;
+            } else {
+                addButton.disabled = true;
+            }
+        });
+
         addButton.addEventListener('click', function() {
             const size = document.getElementById('size-' + product.name).value;
             addToCart(product.name, product.price, size);

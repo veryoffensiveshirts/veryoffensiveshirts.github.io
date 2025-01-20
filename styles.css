@@ -156,6 +156,11 @@ select {
     color: rgb(0, 0, 0);      /* Optional: text color */
     cursor: pointer; 
 }
+*:disabled {
+    background-color: #d6d6d6;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
 /* Footer */
 footer {

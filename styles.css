@@ -27,9 +27,6 @@ body {
   }
   
   /* Header and main grow naturally */
-  header{
-    flex: 0.75;
-  }
 
   main {
     flex: 3;
@@ -41,6 +38,7 @@ header {
     color: #fff;
     padding: 10px;
     text-align: center;
+    flex: 0.75;
 }
 
 header h1 {
@@ -105,7 +103,7 @@ select {
 /* Products Grid */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0px, 100%));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1rem;
     margin: 2rem 0;
 }

@@ -59,7 +59,7 @@
         return actions.order.capture().then(details => {
           alert(`Transaction completed by ${details.payer.name.given_name}!`);
           localStorage.removeItem('cart'); // Clear cart on successful payment
-          sendOrderEmail(details); // Send email notification
+          window.location.href = "payment-done.html";
         });
       },
       onError: (err) => {
@@ -70,37 +70,7 @@
     function redirectToHome() {
       window.location.href = "index.html";
     }
-
-    function sendOrderEmail(details) {
-      // Prepare the order details to send via POST
-      const orderData = {
-        name: document.getElementById('name').value,
-        address: document.getElementById('address').value,
-        cart: cart,
-        total: total,
-        payerName: details.payer.name.given_name
-      };
-
-      // Send order details to the backend using POST request
-      fetch('/send-order-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderData),
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          console.log('Email sent successfully!');
-        } else {
-          console.error('Error sending email:', data.error);
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    }
+    
   </script>
 </body>
 </html>

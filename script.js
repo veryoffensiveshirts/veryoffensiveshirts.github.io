@@ -1,4 +1,4 @@
-const price = 20;
+const price = 15;
 
 const cart_button = document.getElementById("cart-button");
 
@@ -114,6 +114,10 @@ function displayProducts(humorCategory, subtypeCategory = '') {
     }
 
     selectedProducts.forEach(product => {
+        let hidden = ["R U Restarted?", "It\'s Not Gay If You Do It For Money", "MAGA"];
+        if(hidden.includes(product.name)){
+            continue;
+        }
         const productDiv = document.createElement('div');
         productDiv.classList.add('product');
         productDiv.innerHTML = `

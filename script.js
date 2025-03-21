@@ -116,7 +116,7 @@ function displayProducts(humorCategory, subtypeCategory = '') {
     selectedProducts.forEach(product => {
         let hidden = ["R U Restarted?", "It\'s Not Gay If You Do It For Money", "MAGA"];
         if(hidden.includes(product.name)){
-            continue;
+            return;
         }
         const productDiv = document.createElement('div');
         productDiv.classList.add('product');
